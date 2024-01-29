@@ -160,8 +160,9 @@ hello:
 	rm -f ${HOME}/.cargo/bin/hello
 	(cd docs/examples/hello && cargo install --path . -f )
 	ls -lrt ${HOME}/.cargo/bin | tail -3
-sdockerup:
-	 docker-compose up -d
+dockerup:
+	docker-compose up -d
+	docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}' | egrep 'zabbix|NAMES'
 dockerdown:
 	 docker-compose down
 docker:
