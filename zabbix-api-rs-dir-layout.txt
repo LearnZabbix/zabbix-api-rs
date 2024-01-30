@@ -1,0 +1,45 @@
+.
+├── Cargo.lock
+├── Cargo.toml
+├── DEV.md
+├── docker-compose.yml
+├── LICENSE
+├── Makefile
+├── README.md
+├── run-integration-tests.sh
+├── src
+│   ├── client
+│   │   ├── jsonrpc.rs
+│   │   ├── mod.rs
+│   │   ├── post.rs
+│   │   └── v6
+│   │       └── mod.rs
+│   ├── error.rs
+│   ├── host
+│   │   ├── create.rs
+│   │   ├── get.rs
+│   │   └── mod.rs
+│   ├── item
+│   │   ├── create.rs
+│   │   ├── get.rs
+│   │   └── mod.rs
+│   ├── lib.rs
+│   ├── macro
+│   │   └── mod.rs
+│   ├── template
+│   │   └── mod.rs
+│   ├── tests
+│   │   ├── builder.rs
+│   │   ├── integration.rs
+│   │   └── mod.rs
+│   ├── trigger
+│   │   ├── create.rs
+│   │   ├── get.rs
+│   │   └── mod.rs
+│   └── webscenario
+│       ├── create.rs
+│       ├── get.rs
+│       └── mod.rs
+└── zabbix-api-rs-dir-layout.txt
+
+10 directories, 32 files
