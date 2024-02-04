@@ -165,7 +165,7 @@ docker:
 
 itest:
 	ncat -zv localhost 3080
-	ZABBIX_API_URL=http://localhost:3080/api_jsonrpc.php ZABBIX_API_USER=Admin ZABBIX_API_PASSWORD=zabbix cargo test
+	export ZABBIX_API_URL=http://localhost:3080/api_jsonrpc.php ZABBIX_API_USER=Admin ZABBIX_API_PASSWORD=zabbix; cargo test
 help:
 	@echo "Usage: make <target> <argument>"
 	@echo
