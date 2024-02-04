@@ -42,10 +42,10 @@ clean_hardest: clean_rpms
 
 
 #Ref: https://stackoverflow.com/questions/1490949/how-to-write-loop-in-a-makefile
-# MANIFEST  
-SRC1= README.md Makefile Cargo.toml myapp_lightweight_service-dir-layout.txt
-SRC2= src/app.rs src/bin/main.rs  src/controllers/guide.rs  src/controllers/home2.rs  src/controllers/home.rs  src/controllers/mod.rs  src/lib.rs  src/views/home.rs  src/views/mod.rs
-SRC3= tests/requests/guide.rs  tests/requests/home2.rs  tests/requests/home.rs  tests/requests/mod.rs  tests/requests/snapshots/can_get_home2@home2_request.snap  tests/requests/snapshots/home2_request.snap tests/requests/snapshots/can_get_home@home_request.snap
+#  mkdir -p tmp/src/client/v6 docs/src/client/v6 tmp/src/host
+SRC1= README.md Makefile Cargo.toml zabbix-api-rs-dir-layout.txt docker-compose.yml DEV.md .env_db_mysql .env_web
+SRC2= src/error.rs src/lib.rs src/client/jsonrpc.rs src/client/mod.rs src/client/post.rs src/client/v6/mod.rs src/host/create.rs src/host/host/get.rs src/host/mod.rs 
+SRC3= 
 #SRC2= manage.py profiles_projects-dir-layout.txt
 
 tmpdir:
@@ -60,10 +60,10 @@ cleantmp:
 
 allpdf: .pdf
 	touch .pdf
-	rm -f ${A2PSTMP}/*.pdf
-	find  docs  -type f -name *.pdf -exec cp {}  ${A2PSTMP}/  \;
+	# rm -f ${A2PSTMP}/*.pdf
+	find ${A2PSTMP}  -type f -name *.pdf -exec cp {}  ${DOCS}/  \;
 	rm -f /mnt/hgfs/vmware/*.pdf
-	cp -f ${A2PSTMP}/*.pdf  /mnt/hgfs/vmware/
+	cp -f ${DOCS}/*.pdf  /mnt/hgfs/vmware/
 	ls -lrt  /mnt/hgfs/vmware/*.pdf
 
 
@@ -74,13 +74,8 @@ pdf: .pdf
 	$(foreach var, $(SRC2), (cd ${A2PSTMP};ps2pdf $(var).ps $(var).pdf);)
 	$(foreach var, $(SRC3), (cd ${A2PSTMP};ps2pdf $(var).ps $(var).pdf);)
 	rm -f ${A2PSTMP}/*.ps
-	cp ${A2PSTMP}/*.pdf  ${DOCS}/
-	rsync -azpv ${A2PSTMP}/src/*    ${DOCS}/src
-	rsync -azpv ${A2PSTMP}/tests/*  ${DOCS}/tests
-	find ${DOCS}/src/ -type f -name "*.ps" -exec rm -f {} \;
-	find ${DOCS}/src/ -type f
-	find ${DOCS}/tests/ -type f -name "*.ps" -exec rm -f {} \;
-	find ${DOCS}/tests/ -type f 
+	rsync -azpv ${A2PSTMP}/* ${DOCS}/
+	find ${DOCS}/ -type f -name "*.ps" -exec rm -f {} \;
 	touch .pdf
 tree: clean
 	tree -L 5 > ${PROJECT_NAME}-dir-layout.txt
@@ -189,4 +184,3 @@ help:
 	@echo "  status                 ie, git status"
 	@echo "  pull                   ie, git pull"
 	@echo ""
-
